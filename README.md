@@ -14,6 +14,11 @@ Install:
 bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/install.sh)
 ```
 
+Update:
+```sh
+bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/install.sh)
+```
+
 Uninstall:
 ```sh
 bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/uninstall.sh)
