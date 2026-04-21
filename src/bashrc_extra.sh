@@ -61,6 +61,7 @@ alias bash_aliases='nano ~/.bash_aliases'
 alias bash_commands='nano ~/.bash_commands'
 alias bashrc_extra='nano ~/.bashrc_extra'
 alias bashrc_extra_update='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/install.sh)'
+alias bashrc_extra_remove='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/uninstall.sh)'
 alias reload='source ~/.bashrc && bash'
 alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && echo "System updated"'
 
