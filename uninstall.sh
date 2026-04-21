@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-ALIASES_FILE="$HOME/.bash_aliases"
+ALIASES_FILE="$HOME/.bashrc_extra"
 
 remove_aliases() {
     if [ -f "$ALIASES_FILE" ]; then

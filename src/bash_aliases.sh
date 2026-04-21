@@ -59,6 +59,7 @@ alias syslog='tail -n 1000 /var/log/syslog'
 alias bashrc='nano ~/.bashrc'
 alias bash_aliases='nano ~/.bash_aliases'
 alias bash_commands='nano ~/.bash_commands'
+alias bashrc_extra='nano ~/.bashrc_extra'
 alias reload='source ~/.bashrc && bash'
 alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && echo "System updated"'
 

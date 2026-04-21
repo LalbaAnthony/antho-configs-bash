@@ -5,11 +5,11 @@ set -euo pipefail
 REPO="LalbaAnthony/antho-configs-bash"
 BRANCH="main"
 
-ALIASES_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/src/bash_aliases.sh"
-ALIASES_FILE="$HOME/.bash_aliases"
+ALIASES_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/src/bashrc_extra.sh"
+ALIASES_FILE="$HOME/.bashrc_extra"
 
 BASHRC_FILE="$HOME/.bashrc"
-BASHRC_HOOK='[ -f ~/.bash_aliases ] && . ~/.bash_aliases'
+BASHRC_HOOK='[ -f ~/.bashrc_extra ] && . ~/.bashrc_extra'
 
 download_aliases() {
     echo "Downloading bash aliases..."
