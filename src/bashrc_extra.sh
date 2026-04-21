@@ -1,5 +1,3 @@
-# ! MIND RELOAD BASH AFTER ANY CHANGE TO THIS FILE, OTHERWISE CHANGES WON'T BE TAKEN INTO ACCOUNT. USE `reload` ALIAS OR RUN `source ~/.bashrc && bash`
-
 # ===========================
 # Theme
 # ===========================
@@ -62,7 +60,7 @@ alias bash_commands='nano ~/.bash_commands'
 alias bashrc_extra='nano ~/.bashrc_extra'
 alias bashrc_extra_update='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/install.sh)'
 alias bashrc_extra_uninstall='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/uninstall.sh)'
-alias reload='source ~/.bashrc && bash'
+alias reload='source ~/.bashrc'
 alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && echo "System updated"'
 
 # Disk
