@@ -26,7 +26,7 @@ export HISTIGNORE="&:ls:cd:cd -:pwd:exit:clear"
 shopt -s histappend
 
 # ===========================
-# ALIASES
+# EXTRA
 # ===========================
 
 # Commands

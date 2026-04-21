@@ -2,20 +2,20 @@
 
 set -euo pipefail
 
-ALIASES_FILE="$HOME/.bashrc_extra"
+EXTRA_FILE="$HOME/.bashrc_extra"
 
-remove_aliases() {
-    if [ -f "$ALIASES_FILE" ]; then
-        echo "Removing $ALIASES_FILE..."
-        rm "$ALIASES_FILE"
+remove_extra() {
+    if [ -f "$EXTRA_FILE" ]; then
+        echo "Removing $EXTRA_FILE..."
+        rm "$EXTRA_FILE"
     else
-        echo "$ALIASES_FILE not found, skipping."
+        echo "$EXTRA_FILE not found, skipping."
     fi
 }
 
 main() {
-    remove_aliases
-    echo "Bash aliases uninstalled successfully!"
+    remove_extra
+    echo "Bash extra uninstalled successfully!"
 }
 
 main

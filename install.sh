@@ -5,15 +5,15 @@ set -euo pipefail
 REPO="LalbaAnthony/antho-configs-bash"
 BRANCH="main"
 
-ALIASES_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/src/bashrc_extra.sh"
-ALIASES_FILE="$HOME/.bashrc_extra"
+EXTRA_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/src/bashrc_extra.sh"
+EXTRA_FILE="$HOME/.bashrc_extra"
 
 BASHRC_FILE="$HOME/.bashrc"
 BASHRC_HOOK='[ -f ~/.bashrc_extra ] && . ~/.bashrc_extra'
 
-download_aliases() {
-    echo "Downloading bash aliases..."
-    curl -fsSL "$ALIASES_URL" -o "$ALIASES_FILE"
+download_extra() {
+    echo "Downloading bash extra..."
+    curl -fsSL "$EXTRA_URL" -o "$EXTRA_FILE"
 }
 
 register_in_bashrc() {
@@ -33,10 +33,10 @@ reload_shell() {
 }
 
 main() {
-    download_aliases
+    download_extra
     register_in_bashrc
     reload_shell
-    echo "Bash aliases installed successfully!"
+    echo "Bash extra installed successfully!"
 }
 
 main
