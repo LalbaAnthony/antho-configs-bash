@@ -12,7 +12,10 @@ BASHRC_FILE="$HOME/.bashrc"
 BASHRC_HOOK='[ -f ~/.bashrc_extra ] && . ~/.bashrc_extra'
 
 download_extra() {
-    echo "Downloading bash extra..."
+    echo "Deleting existing bash extra if it exists..."
+    rm -f "$EXTRA_FILE"
+
+    echo "Downloading bash extra from $EXTRA_URL..."
     curl -fsSL "$EXTRA_URL" -o "$EXTRA_FILE"
 }
 

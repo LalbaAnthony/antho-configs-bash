@@ -18,3 +18,7 @@ Uninstall:
 ```sh
 bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/uninstall.sh)
 ```
+
+## 🛠️ Sources
+
+https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/src/bashrc_extra.sh
