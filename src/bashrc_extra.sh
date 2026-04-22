@@ -9,9 +9,16 @@ BLUE='\[\e[34m\]'
 MAGENTA='\[\e[35m\]'
 CYAN='\[\e[36m\]'
 WHITE='\[\e[97m\]'
+GRAY='\[\e[90m\]'
 RESET='\[\e[0m\]'
 
-export PS1="\$([ \"\$(id -u)\" = \"0\" ] && echo \"${RED}\" || echo \"${CYAN}\")\u${WHITE}@${GREEN}\h${RESET}:${YELLOW}\w${RESET}# "
+__git_branch() {
+    local branch
+    branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
+    [ -n "$branch" ] && echo " ${GRAY}(${branch})${RESET}"
+}
+
+export PS1="\$([ \"\$(id -u)\" = \"0\" ] && echo \"${RED}\" || echo \"${CYAN}\")\u${WHITE}@${GREEN}\h${RESET}:${YELLOW}\w\$(__git_branch)${RESET}# "
 
 # ===========================
 # CONFIG
