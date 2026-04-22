@@ -12,13 +12,7 @@ WHITE='\[\e[97m\]'
 GRAY='\[\e[90m\]'
 RESET='\[\e[0m\]'
 
-__git_branch() {
-    local branch
-    branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
-    [ -n "$branch" ] && printf " \001\e[90m\002(%s)\001\e[0m\002" "$branch"
-}
-
-export PS1="\$([ \"\$(id -u)\" = \"0\" ] && echo \"${RED}\" || echo \"${CYAN}\")\u${WHITE}@${GREEN}\h${RESET}:${YELLOW}\w\$(__git_branch)${RESET}# "
+export PS1="\$([ \"\$(id -u)\" = \"0\" ] && echo \"${RED}\" || echo \"${CYAN}\")\u${WHITE}@${GREEN}\h${RESET}:${YELLOW}\w\$(branch=\$(git branch 2>/dev/null | grep '^*' | colrm 1 2); [ -n \"\$branch\" ] && echo \"${GRAY} (\$branch)${RESET}\")${RESET}# "
 
 # ===========================
 # CONFIG
