@@ -50,14 +50,16 @@ alias again='fc -s' # Repeat last command
 alias h='history | tail -n 30'
 alias hfreq='history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -n 20' # Most frequently used commands
 
-# System
-alias syslog='tail -n 1000 /var/log/syslog'
+# Bash
 alias bashrc='nano ~/.bashrc'
 alias bash_aliases='nano ~/.bash_aliases'
 alias bash_commands='nano ~/.bash_commands'
 alias bashrc_extra='nano ~/.bashrc_extra'
 alias bashrc_extra_update='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/install.sh)'
 alias bashrc_extra_uninstall='bash <(curl -fsSL https://raw.githubusercontent.com/LalbaAnthony/antho-configs-bash/main/uninstall.sh)'
+
+# System
+alias syslog='tail -n 1000 /var/log/syslog'
 alias reload='source ~/.bashrc'
 alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && echo "System updated"'
 
