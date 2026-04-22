@@ -1,6 +1,6 @@
-# ===========================
-# Theme
-# ===========================
+# =================================================================================
+# LINUX CONFIG
+# =================================================================================
 
 RED='\[\e[31m\]'
 GREEN='\[\e[32m\]'
@@ -12,11 +12,8 @@ WHITE='\[\e[97m\]'
 GRAY='\[\e[90m\]'
 RESET='\[\e[0m\]'
 
+# Theme
 export PS1="\$([ \"\$(id -u)\" = \"0\" ] && echo \"${RED}\" || echo \"${CYAN}\")\u${WHITE}@${GREEN}\h${RESET}:${YELLOW}\w\$(branch=\$(git branch 2>/dev/null | grep '^*' | colrm 1 2); [ -n \"\$branch\" ] && echo \"${GRAY} (\$branch)${RESET}\")${RESET} \$ "
-
-# ===========================
-# CONFIG
-# ===========================
 
 # History
 export HISTSIZE=5000
@@ -24,22 +21,11 @@ export HISTFILESIZE=10000
 export HISTIGNORE="&:ls:cd:cd -:pwd:exit:clear"
 shopt -s histappend
 
-# ===========================
-# ALIASES
-# ===========================
+# =================================================================================
+# RANDOM
+# =================================================================================
 
-# Commands
-alias cls='clear'
-alias please='sudo'
-alias plz='sudo'
-alias pleasefuck='sudo $(fc -ln -1)' # Repeat last command with sudo, works even if last command had arguments
-alias plzfuck='sudo $(fc -ln -1)'
-alias fuck='fc -e nano' # Edit last command in nano
-alias again='fc -s' # Repeat last command
-alias h='history | tail -n 30'
-alias hfreq='history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -n 20' # Most frequently used commands
-
-# Files
+# Folders
 alias ll='ls -lah --color=auto'
 alias la='ls -A'
 alias l='ls -CF'
@@ -52,6 +38,17 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias www='cd /var/www'
 alias html='cd /var/www/html'
+
+# Random
+alias cls='clear'
+alias please='sudo'
+alias plz='sudo'
+alias pleasefuck='sudo $(fc -ln -1)' # Repeat last command with sudo, works even if last command had arguments
+alias plzfuck='sudo $(fc -ln -1)'
+alias fuck='fc -e nano' # Edit last command in nano
+alias again='fc -s' # Repeat last command
+alias h='history | tail -n 30'
+alias hfreq='history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -n 20' # Most frequently used commands
 
 # System
 alias syslog='tail -n 1000 /var/log/syslog'
@@ -68,167 +65,12 @@ alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y &
 alias du20='du -ah . | sort -rh | head -n 20' # Show top 20 largest files/folders in current directory
 alias watchspace='watch -n5 "df -hT | grep -E \"Filesystem|/dev/\""' # Monitor disk space every 5 seconds
 
-# Network
-alias speed='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
-alias ipl='hostname -I' # Get local IP address
-alias ipp='curl ifconfig.me && echo' # Get public IP address
-alias ports='netstat -tulanp' # List all listening ports
-alias killport='f(){ sudo lsof -t -i:$1 | xargs sudo kill -9; }; f'
-alias randpass='openssl rand -base64 20'
-alias nettop='sudo netstat -tulpen | sort -k3' # Show open TCP connections sorted
-alias dnscheck='for d in 1.1.1.1 8.8.8.8 9.9.9.9; do ping -c2 $d; done' # Ping all DNS providers (Cloudflare, Google, Quad9)
-
-# Docker
-alias dps='docker ps'
-alias dpa='docker ps -a'
-alias drm='docker rm -f'
-alias dim='docker images'
-alias dlog='docker logs -f'
-alias dclean='docker system prune -af --volumes'
-alias dexec='f(){ docker exec -it "$1" bash; }; f' # Usage: dexec <container_id>
-alias drestart='docker restart $(docker ps -q)' # Restart all running containers
-
-# Git
-alias gs='git status -sb'
-alias ga='git add .'
-alias gc='git commit -m'
-alias gp='git push'
-alias gpo='git push origin'
-alias gpl='git pull'
-alias gf='git fetch'
-alias gplo='git pull origin'
-alias gl='git log --oneline --graph --decorate --all'
-alias gd='git diff origin/$(git rev-parse --abbrev-ref HEAD)'
-alias gds='git diff --shortstat origin/$(git rev-parse --abbrev-ref HEAD)'
-alias gco='git checkout'
-alias gcb='git checkout -b'
-alias gbd='git branch -d'
-alias gundo='git reset --soft HEAD~1'
-alias gclean='git reset --hard && git clean -fd'
-alias gtags='git tag -l --sort=-creatordate | head -n 10'
-alias gpf='git push --force-with-lease'
-
-# Apache
-alias a2log='tail -f /var/log/apache2/error.log'
-alias a2c='sudo apache2ctl configtest'
-alias a2s='sudo systemctl status apache2'
-alias a2r='sudo systemctl reload apache2'
-alias a2rr='sudo systemctl restart apache2 || sudo apache2ctl configtest'
-alias a2sa='cd /etc/apache2/sites-available'
-alias a2se='cd /etc/apache2/sites-enabled'
-
-# PHP
-alias phpswitch='sudo update-alternatives --config php'
-alias phplist='sudo update-alternatives --list php'
-alias php56='sudo update-alternatives --set php /usr/bin/php5.6 && sudo systemctl restart apache2'
-alias php70='sudo update-alternatives --set php /usr/bin/php7.0 && sudo systemctl restart apache2'
-alias php74='sudo update-alternatives --set php /usr/bin/php7.4 && sudo systemctl restart apache2'
-alias php81='sudo update-alternatives --set php /usr/bin/php8.1 && sudo systemctl restart apache2'
-alias php82='sudo update-alternatives --set php /usr/bin/php8.2 && sudo systemctl restart apache2'
-alias php83='sudo update-alternatives --set php /usr/bin/php8.3 && sudo systemctl restart apache2'
-alias php84='sudo update-alternatives --set php /usr/bin/php8.4 && sudo systemctl restart apache2'
-alias phpsetup='rm -rf vendor composer.lock && composer install'
-
-# Wordpress
-alias wpclisetup='cd ~ && rm -f wp-cli.phar && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar'
-# alias wp='~/wp-cli.phar' # ? If you want to use wp from anywhere, uncomment this line and add ~/ to your $PATH
-alias wplist='wp plugin list --field=name' # List all plugin slugs
-alias wpclear='wp cache flush && wp transient delete --all && sudo systemctl reload apache2' # Clear all cache layers
-alias wpexport='wp db export backup_wp_$(date +%F_%H-%M-%S).sql' # Export DB to timestamped file
-alias wptestdb='sudo -u www-data php -r '\''require "wp-config.php"; $m = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); echo $m->connect_error ? "Error: " . $m->connect_error : "Success!\n";'\'''
-alias wptesturl='sudo -u www-data php -r '\''require "wp-load.php"; echo get_option("siteurl")."\n"; echo get_option("home")."\n";'\'''
-
-# Laravel
-alias art='php artisan'
-alias artperm='sudo chown -R www-data:www-data public storage bootstrap/cache && sudo chmod -R 775 public storage bootstrap/cache'
-alias artcache='art cache:clear && art config:clear && art view:clear && art route:clear && art optimize:clear&& art config:cache'
-alias artsetup='phpsetup && artperm && artcache && art storage:link && art migrate:fresh'
-alias artserve='art serve --host=0.0.0.0 --port=8000'
-
-# Python
-alias psetup='rm -rf venv && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt'
-
-# Node
-alias nr='npm run'
-alias nrb='npm run build'
-alias nrd='npm run dev'
-alias nrt='npm run test'
-alias nstart='npm start'
-alias nsetup='rm -rf node_modules && rm -rf .vite .cache && rm -rf package-lock.json && npm i'
-alias yr='yarn run'
-alias yrb='yarn run build'
-alias yrd='yarn run dev'
-alias yrt='yarn run test'
-alias ystart='yarn start'
-alias ysetup='rm -rf node_modules && rm -rf .vite .cache && rm -rf yarn.lock && yarn install'
-
-# Quasar
-alias qd='quasar dev'
-alias qb='quasar build'
-
-# ===========================
-# COMMANDS
-# ===========================
-
-webperms() {
-    local TARGET=$1
-    local OWNER=${2:-www-data}
-
-    if [ -z "$TARGET" ]; then
-        echo "Usage: webperms <path> [owner=www-data]"
-        return 1
-    fi
-
-    if [ ! -e "$TARGET" ]; then
-        echo "Error: Path does not exist"
-        return 1
-    fi
-
-    /bin/chmod -R 775 "$TARGET"
-    /bin/chown -R "$OWNER:www-data" "$TARGET"
-
-    echo "Set permissions 775 and owner $OWNER:www-data on '$TARGET'"
-}
-
-a2pick() {
-    local sites
-    sites=(/etc/apache2/sites-available/*.conf)
-
-    select site in "${sites[@]}"; do
-        [ -n "$site" ] || { echo "Invalid choice"; return 1; }
-        sudo a2dissite *.conf
-        sudo a2ensite "$(basename "$site")"
-        sudo systemctl restart apache2
-        sudo apache2ctl configtest
-        break
-    done
-}
-
-gbranch() {
-    local branches
-    branches=$(git branch | sed 's/^[* ] //')
-
-    select branch in $branches; do
-        [ -n "$branch" ] || { echo "Invalid choice"; return 1; }
-        git checkout "$branch"
-        break
-    done
-}
-
-# Script meant to drag changes from current branch to another branch
-gdrag() {
-    origin=$(git rev-parse --abbrev-ref HEAD);
-
-    git checkout $1;
-    git pull origin $origin;
-    git push; 
-    git checkout $origin; # Go back to origin at the end
-}
-
+# Create a folder and cd into it
 mkcd() {
     mkdir -p "$1" && cd "$1" || return
 }
 
+# Extract various archive types with a single command
 extractt() {
     if [ -f "$1" ]; then
         case "$1" in
@@ -265,6 +107,167 @@ rreplace() {
 # Compare two dirs visually
 diffd() {
     diff -qr "$1" "$2" | less;
+}
+
+# =================================================================================
+# NETWORK
+# =================================================================================
+
+alias speed='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
+alias ipl='hostname -I' # Get local IP address
+alias ipp='curl ifconfig.me && echo' # Get public IP address
+alias ports='netstat -tulanp' # List all listening ports
+alias killport='f(){ sudo lsof -t -i:$1 | xargs sudo kill -9; }; f'
+alias randpass='openssl rand -base64 20'
+alias nettop='sudo netstat -tulpen | sort -k3' # Show open TCP connections sorted
+alias dnscheck='for d in 1.1.1.1 8.8.8.8 9.9.9.9; do ping -c2 $d; done' # Ping all DNS providers (Cloudflare, Google, Quad9)
+
+# =================================================================================
+# PHP
+# =================================================================================
+
+# PHP
+alias phpswitch='sudo update-alternatives --config php'
+alias phplist='sudo update-alternatives --list php'
+alias php56='sudo update-alternatives --set php /usr/bin/php5.6 && sudo systemctl restart apache2'
+alias php70='sudo update-alternatives --set php /usr/bin/php7.0 && sudo systemctl restart apache2'
+alias php74='sudo update-alternatives --set php /usr/bin/php7.4 && sudo systemctl restart apache2'
+alias php81='sudo update-alternatives --set php /usr/bin/php8.1 && sudo systemctl restart apache2'
+alias php82='sudo update-alternatives --set php /usr/bin/php8.2 && sudo systemctl restart apache2'
+alias php83='sudo update-alternatives --set php /usr/bin/php8.3 && sudo systemctl restart apache2'
+alias php84='sudo update-alternatives --set php /usr/bin/php8.4 && sudo systemctl restart apache2'
+alias phpsetup='rm -rf vendor composer.lock && composer install'
+
+# Wordpress
+alias wpclisetup='cd ~ && rm -f wp-cli.phar && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar'
+# alias wp='~/wp-cli.phar' # ? If you want to use wp from anywhere, uncomment this line and add ~/ to your $PATH
+alias wplist='wp plugin list --field=name' # List all plugin slugs
+alias wpclear='wp cache flush && wp transient delete --all && sudo systemctl reload apache2' # Clear all cache layers
+alias wpexport='wp db export backup_wp_$(date +%F_%H-%M-%S).sql' # Export DB to timestamped file
+alias wptestdb='sudo -u www-data php -r '\''require "wp-config.php"; $m = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); echo $m->connect_error ? "Error: " . $m->connect_error : "Success!\n";'\'''
+alias wptesturl='sudo -u www-data php -r '\''require "wp-load.php"; echo get_option("siteurl")."\n"; echo get_option("home")."\n";'\'''
+
+# Laravel
+alias art='php artisan'
+alias artperm='sudo chown -R www-data:www-data public storage bootstrap/cache && sudo chmod -R 775 public storage bootstrap/cache'
+alias artcache='art cache:clear && art config:clear && art view:clear && art route:clear && art optimize:clear&& art config:cache'
+alias artsetup='phpsetup && artperm && artcache && art storage:link && art migrate:fresh'
+alias artserve='art serve --host=0.0.0.0 --port=8000'
+
+# =================================================================================
+# Node
+# =================================================================================
+
+# Node
+alias nr='npm run'
+alias nrb='npm run build'
+alias nrd='npm run dev'
+alias nrt='npm run test'
+alias nstart='npm start'
+alias nsetup='rm -rf node_modules && rm -rf .vite .cache && rm -rf package-lock.json && npm i'
+alias yr='yarn run'
+alias yrb='yarn run build'
+alias yrd='yarn run dev'
+alias yrt='yarn run test'
+alias ystart='yarn start'
+alias ysetup='rm -rf node_modules && rm -rf .vite .cache && rm -rf yarn.lock && yarn install'
+
+# Quasar
+alias qd='quasar dev'
+alias qb='quasar build'
+
+# =================================================================================
+# Apache
+# =================================================================================
+
+alias a2log='tail -f /var/log/apache2/error.log'
+alias a2c='sudo apache2ctl configtest'
+alias a2s='sudo systemctl status apache2'
+alias a2r='sudo systemctl reload apache2'
+alias a2rr='sudo systemctl restart apache2 || sudo apache2ctl configtest'
+alias a2sa='cd /etc/apache2/sites-available'
+alias a2se='cd /etc/apache2/sites-enabled'
+
+webperms() {
+    local TARGET=$1
+    local OWNER=${2:-www-data}
+
+    if [ -z "$TARGET" ]; then
+        echo "Usage: webperms <path> [owner=www-data]"
+        return 1
+    fi
+
+    if [ ! -e "$TARGET" ]; then
+        echo "Error: Path does not exist"
+        return 1
+    fi
+
+    /bin/chmod -R 775 "$TARGET"
+    /bin/chown -R "$OWNER:www-data" "$TARGET"
+
+    echo "Set permissions 775 and owner $OWNER:www-data on '$TARGET'"
+}
+
+a2pick() {
+    local sites
+    sites=(/etc/apache2/sites-available/*.conf)
+
+    select site in "${sites[@]}"; do
+        [ -n "$site" ] || { echo "Invalid choice"; return 1; }
+        sudo a2dissite *.conf
+        sudo a2ensite "$(basename "$site")"
+        sudo systemctl restart apache2
+        sudo apache2ctl configtest
+        break
+    done
+}
+
+# =================================================================================
+# Git
+# =================================================================================
+
+alias gs='git status -sb'
+alias ga='git add .'
+alias gc='git commit -m'
+alias gp='git push'
+alias gpo='git push origin'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gplo='git pull origin'
+alias gl='git log --oneline --graph --decorate --all'
+alias gd='git diff origin/$(git rev-parse --abbrev-ref HEAD)'
+alias gds='git diff --shortstat origin/$(git rev-parse --abbrev-ref HEAD)'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gbd='git branch -d'
+alias gundo='git reset --soft HEAD~1'
+alias gclean='git reset --hard && git clean -fd'
+alias gtags='git tag -l --sort=-creatordate | head -n 10'
+alias gpf='git push --force-with-lease'
+
+gacp() {
+    git add . && git commit -m "$1" && git push
+}
+
+gbranch() {
+    local branches
+    branches=$(git branch | sed 's/^[* ] //')
+
+    select branch in $branches; do
+        [ -n "$branch" ] || { echo "Invalid choice"; return 1; }
+        git checkout "$branch"
+        break
+    done
+}
+
+# Script meant to drag changes from current branch to another branch
+gdrag() {
+    origin=$(git rev-parse --abbrev-ref HEAD);
+
+    git checkout $1;
+    git pull origin $origin;
+    git push; 
+    git checkout $origin; # Go back to origin at the end
 }
 
 # Conventional commit helper
@@ -343,6 +346,19 @@ convc() {
     [[ -z "$yn" || "$yn" =~ ^[Yy]$ ]] && git push
 }
 
+# =================================================================================
+# Docker
+# =================================================================================
+
+alias dps='docker ps'
+alias dpa='docker ps -a'
+alias drm='docker rm -f'
+alias dim='docker images'
+alias dlog='docker logs -f'
+alias dclean='docker system prune -af --volumes'
+alias dexec='f(){ docker exec -it "$1" bash; }; f' # Usage: dexec <container_id>
+alias drestart='docker restart $(docker ps -q)' # Restart all running containers
+
 dnuke() {
     echo "WARNING: This will destroy ALL Docker containers, images, volumes, networks, and build cache."
     echo "Current state:"
@@ -364,6 +380,10 @@ dnuke() {
     echo "Docker environment wiped."
 }
 
+# =================================================================================
+# SQL
+# =================================================================================
+
 __mysql_require_cnf() {
     local CNF="$HOME/.my.cnf"
 
@@ -380,6 +400,7 @@ __mysql_require_cnf() {
         return 1
     fi
 }
+
 
 sqlimport() {
     local FILE=$1
