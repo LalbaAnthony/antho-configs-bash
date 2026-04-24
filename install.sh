@@ -24,6 +24,7 @@ register_in_bashrc() {
         echo "Hook already present in $BASHRC_FILE, skipping."
     else
         echo "Registering hook in $BASHRC_FILE..."
+        echo "" >> "$BASHRC_FILE"
         echo "$BASHRC_HOOK" >> "$BASHRC_FILE"
     fi
 }
